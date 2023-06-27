@@ -5,9 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Builder
@@ -24,4 +23,9 @@ public class MenuEntity {
     private String parent;
     private String level;
     private char line;
+
+    @ManyToMany
+    private List<StoreEntity> storeEntityList;
+
+
 }

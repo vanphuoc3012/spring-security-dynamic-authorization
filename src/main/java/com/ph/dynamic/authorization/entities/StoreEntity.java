@@ -5,9 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Builder
@@ -23,6 +22,15 @@ public class StoreEntity {
     private String storeHash;
     private String domain;
     private String showStatus;
-    private String companyId;
+
+    @ManyToOne
+    @JoinColumn(name = "company_id")
+    private CompanyEntity companyEntity;
+
+    @ManyToMany
+    private List<MenuEntity> menuEntityList;
     private String status;
+
+    @OneToMany(mappedBy = "storeEntity")
+    private List<GroupEntity> groupEntityList;
 }

@@ -8,7 +8,9 @@ import lombok.NoArgsConstructor;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @Builder
@@ -29,4 +31,7 @@ public class CompanyEntity {
     private Date contractStartDate;
     private Date contractEndDate;
     private char status;
+
+    @OneToMany(mappedBy = "companyEntity")
+    private List<StoreEntity> storeEntityList;
 }

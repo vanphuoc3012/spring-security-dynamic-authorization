@@ -1,11 +1,13 @@
 package com.ph.dynamic.authorization.entities;
 
+import com.ph.dynamic.authorization.auth.role.CompanyRole;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Builder
@@ -26,6 +28,8 @@ public class UserEntity {
     private String errCount;
     private String status;
 
+    @OneToMany(mappedBy = "userEntity", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<CompanyRole> companyRole;
     public enum UserType {
         MBO, APO
     }

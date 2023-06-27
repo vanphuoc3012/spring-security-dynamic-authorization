@@ -14,10 +14,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     List<String> whiteList = List.of(
             "/login", "swagger-ui.html",
             "/swagger-ui/**",
-            "/swagger-resources/**", "/v3/api-docs/**");
+            "/swagger-resources/**", "/v3/api-docs/**",
+            "/h2-console/**");
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        http.headers().frameOptions().disable();
         http.csrf().disable()
                 .authorizeRequests()
                 .antMatchers(whiteList.toArray(new String[0])).permitAll()
@@ -28,8 +30,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .logout();
     }
 
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-
-    }
 }
