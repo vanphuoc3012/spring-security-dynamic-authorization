@@ -25,7 +25,6 @@ public class CompanyRoleServiceImpl implements RoleService {
             }
         }
 
-        
         return false;
     }
 }
