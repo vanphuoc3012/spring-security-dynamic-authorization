@@ -16,7 +16,6 @@ import java.util.List;
 @AllArgsConstructor
 public class UserEntity {
     @Id
-    @GeneratedValue(generator = "uuid")
     private String id;
     private String password;
     private String name;

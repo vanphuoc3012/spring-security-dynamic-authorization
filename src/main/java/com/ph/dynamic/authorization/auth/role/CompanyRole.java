@@ -3,10 +3,16 @@ package com.ph.dynamic.authorization.auth.role;
 import com.ph.dynamic.authorization.auth.role.type.CompanyRoleType;
 import com.ph.dynamic.authorization.entities.CompanyEntity;
 import com.ph.dynamic.authorization.entities.UserEntity;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class CompanyRole {
 
     @Id

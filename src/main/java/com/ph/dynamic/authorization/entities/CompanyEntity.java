@@ -1,14 +1,12 @@
 package com.ph.dynamic.authorization.entities;
 
+import com.ph.dynamic.authorization.auth.role.CompanyRole;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
@@ -34,4 +32,7 @@ public class CompanyEntity {
 
     @OneToMany(mappedBy = "companyEntity")
     private List<StoreEntity> storeEntityList;
+
+    @OneToMany(mappedBy = "companyEntity")
+    private List<CompanyRole> companyRoleList;
 }
