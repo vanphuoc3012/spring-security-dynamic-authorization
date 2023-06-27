@@ -14,14 +14,15 @@ import javax.persistence.Id;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-public class MenuEntity {
+public class StoreEntity {
     @Id
     @GeneratedValue(generator = "uuid")
     private String id;
     private String name;
-//    private String order;
-    private String url;
-    private String parent;
-    private String level;
-    private char line;
+    private String token;
+    private String storeHash;
+    private String domain;
+    private String showStatus;
+    private String companyId;
+    private String status;
 }
