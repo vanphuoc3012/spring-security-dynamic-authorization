@@ -1,6 +1,5 @@
 package com.ph.dynamic.authorization.entities;
 
-import com.ph.dynamic.authorization.auth.role.CompanyRole;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,8 +16,8 @@ import java.util.List;
 @AllArgsConstructor
 public class CompanyEntity {
     @Id
-    @GeneratedValue(generator = "uuid")
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String name;
     private String contractHolder;
     private String email;
@@ -33,6 +32,4 @@ public class CompanyEntity {
     @OneToMany(mappedBy = "companyEntity")
     private List<StoreEntity> storeEntityList;
 
-    @OneToMany(mappedBy = "companyEntity")
-    private List<CompanyRole> companyRoleList;
 }

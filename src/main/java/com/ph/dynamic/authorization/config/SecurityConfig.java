@@ -11,7 +11,7 @@ import java.util.List;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     List<String> whiteList = List.of(
-            "/login", "swagger-ui.html",
+            "/login", "swagger-ui/index.html",
             "/swagger-ui/**",
             "/swagger-resources/**", "/v3/api-docs/**",
             "/h2-console/**");

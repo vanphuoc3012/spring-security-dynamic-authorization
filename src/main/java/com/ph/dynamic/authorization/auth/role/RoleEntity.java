@@ -1,33 +1,31 @@
 package com.ph.dynamic.authorization.auth.role;
 
-import com.ph.dynamic.authorization.auth.role.type.CompanyRoleType;
-import com.ph.dynamic.authorization.entities.CompanyEntity;
 import com.ph.dynamic.authorization.entities.UserEntity;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-@Entity
 @Data
-@AllArgsConstructor
+@Builder
+@Entity
 @NoArgsConstructor
-public class CompanyRole {
-
+@AllArgsConstructor
+public class RoleEntity {
     @Id
-    @GeneratedValue(generator = "uuid")
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
     private UserEntity userEntity;
 
-    @ManyToOne
-    @JoinColumn(name = "company_id")
-    private CompanyEntity companyEntity;
+    private Long resourceId;
 
     @Enumerated(EnumType.STRING)
-    private CompanyRoleType type;
-}
+    private RoleType roleType;
 
+    private String resourceTableName;
+}

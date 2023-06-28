@@ -14,8 +14,8 @@ import javax.persistence.*;
 @AllArgsConstructor
 public class GroupEntity {
     @Id
-    @GeneratedValue(generator = "uuid")
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String name;
     private char status;
 

@@ -1,6 +1,7 @@
 package com.ph.dynamic.authorization.auth;
 
-import com.ph.dynamic.authorization.auth.role.type.SystemRoleType;
+import com.ph.dynamic.authorization.auth.role.RoleType;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.Set;
 
@@ -11,6 +12,6 @@ public interface Role {
     }
 
     static Set<Role> roots() {
-        return Set.of(SystemRoleType.MASTER_ADMIN);
+        return Set.of(RoleType.MASTER_ADMIN);
     }
 }

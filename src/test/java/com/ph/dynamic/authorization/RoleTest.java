@@ -1,10 +1,7 @@
 package com.ph.dynamic.authorization;
 
 import com.ph.dynamic.authorization.auth.Role;
-import com.ph.dynamic.authorization.auth.role.type.CompanyRoleType;
-import com.ph.dynamic.authorization.auth.role.type.GroupRoleType;
-import com.ph.dynamic.authorization.auth.role.type.StoreRoleType;
-import com.ph.dynamic.authorization.auth.role.type.SystemRoleType;
+import com.ph.dynamic.authorization.auth.role.RoleType;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -15,21 +12,18 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static java.util.Arrays.stream;
-
 public class RoleTest {
 
     @Test
     void shouldNotThrowStackOverflowException() {
         final var roots = Role.roots();
-        final var existingRoles = Stream.concat(
-                stream(GroupRoleType.values()),
-                stream(StoreRoleType.values())
-        ).collect(Collectors.toList());
+        final var existingRoles = Stream.of(RoleType.values());
 
         Assertions.assertDoesNotThrow(() -> {
             roots.forEach(root -> {
+                System.out.println("Root: " + root);
                 existingRoles.forEach(roleToCheck -> {
+                    System.out.println(roleToCheck.name());
                     Assertions.assertTrue(root.includes(roleToCheck));
                 });
             });
@@ -47,29 +41,20 @@ public class RoleTest {
     private static Stream<Arguments> provideArgs() {
         return Stream.of(
                 Arguments.arguments(
-                        SystemRoleType.MASTER_ADMIN,
-                        Stream.concat(
-                                stream(CompanyRoleType.values()),
-                                stream(StoreRoleType.values())
-                        ).collect(Collectors.toSet()),
+                        RoleType.MASTER_ADMIN,
+                        Set.of(RoleType.MASTER_ADMIN, RoleType.DELETE, RoleType.CREATE_UPDATE, RoleType.READ, RoleType.USER, RoleType.GUEST),
                         true
                 ),
                 Arguments.arguments(
-                        StoreRoleType.MANAGER,
-                        Stream.of(
-                                StoreRoleType.EDITOR,
-                                StoreRoleType.VIEWER,
-                                GroupRoleType.EDITOR,
-                                GroupRoleType.VIEWER
-                        ).collect(Collectors.toSet()),
-                        true
-                ),
-                Arguments.arguments(
-                        GroupRoleType.VIEWER,
-                        Stream.of(
-                                GroupRoleType.EDITOR
-                        ).collect(Collectors.toSet()),
+                        RoleType.CREATE_UPDATE,
+                        Set.of(RoleType.DELETE, RoleType.MASTER_ADMIN),
                         false
+                ),
+                Arguments.arguments(
+                        RoleType.READ,
+                        Set.of(RoleType.CREATE_UPDATE, RoleType.DELETE, RoleType.MASTER_ADMIN),
+                        false
+
                 )
         );
     }

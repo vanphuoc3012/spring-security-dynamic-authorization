@@ -15,8 +15,8 @@ import java.util.List;
 @AllArgsConstructor
 public class StoreEntity {
     @Id
-    @GeneratedValue(generator = "uuid")
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String name;
     private String token;
     private String storeHash;

@@ -15,8 +15,8 @@ import java.util.List;
 @AllArgsConstructor
 public class MenuEntity {
     @Id
-    @GeneratedValue(generator = "uuid")
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String name;
 //    private String order;
     private String url;
