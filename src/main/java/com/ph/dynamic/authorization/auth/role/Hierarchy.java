@@ -8,7 +8,7 @@ import lombok.Getter;
 public enum Hierarchy {
     SYSTEM("", "Madive System admin"),
     COMPANY("", "Company"),
-    STORE("", "Company");
+    STORE("", "Store table");
 
     private String tableName;
     private String description;

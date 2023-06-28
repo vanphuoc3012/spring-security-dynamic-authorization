@@ -4,6 +4,7 @@ import com.ph.dynamic.authorization.entities.CompanyEntity;
 import com.ph.dynamic.authorization.repository.CompanyRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -20,7 +21,7 @@ public class CompanyController {
 
     @GetMapping("/{id}")
     // Company admin role
-public ResponseEntity<CompanyEntity> getCompany(@PathVariable Long id) {
+    public ResponseEntity<CompanyEntity> getCompany(@PathVariable Long id) {
         return ResponseEntity.ok(companyRepository.findById(id).orElse(null));
     }
 

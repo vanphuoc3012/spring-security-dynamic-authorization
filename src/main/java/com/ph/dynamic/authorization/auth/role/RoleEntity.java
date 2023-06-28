@@ -27,5 +27,6 @@ public class RoleEntity {
     @Enumerated(EnumType.STRING)
     private RoleType roleType;
 
-    private String resourceTableName;
+    @Enumerated(EnumType.STRING)
+    private ResourceType resourceType;
 }

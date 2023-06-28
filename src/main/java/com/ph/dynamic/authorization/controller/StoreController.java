@@ -1,12 +1,14 @@
 package com.ph.dynamic.authorization.controller;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/stores")
+@RequestMapping("/company/{companyId}/stores")
 public class StoreController {
     @GetMapping
-    public String getStores() {
+    @PreAuthorize("@RoleCheckingService.hasAnyRoleByResourcesId(#companyId, @RoleType.STORE_READ)")
+    public String getStores(@PathVariable("companyId") Long companyId) {
         return "GET:: stores";
     }
 

@@ -1,7 +1,6 @@
 package com.ph.dynamic.authorization.auth;
 
 import com.ph.dynamic.authorization.auth.role.RoleType;
-import lombok.extern.slf4j.Slf4j;
 
 import java.util.Set;
 
