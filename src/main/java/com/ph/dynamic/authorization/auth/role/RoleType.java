@@ -11,22 +11,22 @@ import java.util.Set;
 @Slf4j
 public enum RoleType implements Role {
     MASTER_ADMIN,
-    COMPANY_DELETE, COMPANY_CREATE_UPDATE, COMPANY_READ,
-    STORE_DELETE, STORE_CREATE_UPDATE, STORE_READ,
+    COMPANY_FULL_ACCESS, COMPANY_EDITOR, COMPANY_VIEWER,
+    STORE_FULL_ACCESS, STORE_EDITOR, STORE_VIEWER,
     USER, GUEST;
 
     private Set<Role> childRoles = new HashSet<>();
 
     static {
-        MASTER_ADMIN.childRoles.add(COMPANY_DELETE);
+        MASTER_ADMIN.childRoles.add(COMPANY_FULL_ACCESS);
 
-        COMPANY_DELETE.childRoles.add(COMPANY_CREATE_UPDATE);
-        COMPANY_CREATE_UPDATE.childRoles.add(COMPANY_READ);
-        COMPANY_CREATE_UPDATE.childRoles.add(STORE_DELETE);
-        STORE_DELETE.childRoles.add(STORE_CREATE_UPDATE);
-        STORE_CREATE_UPDATE.childRoles.add(STORE_READ);
+        COMPANY_FULL_ACCESS.childRoles.add(COMPANY_EDITOR);
+        COMPANY_EDITOR.childRoles.add(COMPANY_VIEWER);
+        COMPANY_EDITOR.childRoles.add(STORE_FULL_ACCESS);
+        STORE_FULL_ACCESS.childRoles.add(STORE_EDITOR);
+        STORE_EDITOR.childRoles.add(STORE_VIEWER);
 
-        STORE_READ.childRoles.add(USER);
+        STORE_VIEWER.childRoles.add(USER);
         USER.childRoles.add(GUEST);
     }
 
@@ -41,12 +41,13 @@ public enum RoleType implements Role {
     @Getter
     static class SpringComponent {
         private final RoleType MASTER_ADMIN = RoleType.MASTER_ADMIN;
-        private final RoleType COMPANY_DELETE = RoleType.COMPANY_DELETE;
-        private final RoleType COMPANY_CREATE_UPDATE = RoleType.COMPANY_CREATE_UPDATE;
-        private final RoleType COMPANY_READ = RoleType.COMPANY_READ;
-        private final RoleType STORE_DELETE = RoleType.STORE_DELETE;
-        private final RoleType STORE_CREATE_UPDATE = RoleType.STORE_CREATE_UPDATE;
-        private final RoleType STORE_READ = RoleType.STORE_READ;
-        private final RoleType USER = RoleType.GUEST;
+        private final RoleType COMPANY_FULL_ACCESS = RoleType.COMPANY_FULL_ACCESS;
+        private final RoleType COMPANY_EDITOR = RoleType.COMPANY_EDITOR;
+        private final RoleType COMPANY_VIEWER = RoleType.COMPANY_VIEWER;
+        private final RoleType STORE_FULL_ACCESS = RoleType.STORE_FULL_ACCESS;
+        private final RoleType STORE_EDITOR = RoleType.STORE_EDITOR;
+        private final RoleType STORE_VIEWER = RoleType.STORE_VIEWER;
+        private final RoleType USER = RoleType.USER;
+        private final RoleType GUEST = RoleType.GUEST;
     }
 }

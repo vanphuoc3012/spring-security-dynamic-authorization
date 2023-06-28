@@ -54,7 +54,7 @@ public class SpringSecurityDynamicAuthorizationApplication {
             var roleForAdCom1 = new RoleEntity();
             roleForAdCom1.setResourceId(com1.getId());
             roleForAdCom1.setUserEntity(adCom1);
-            roleForAdCom1.setRoleType(RoleType.COMPANY_DELETE);
+            roleForAdCom1.setRoleType(RoleType.COMPANY_FULL_ACCESS);
             roleForAdCom1.setResourceType(ResourceType.COMPANY);
             roleRepository.save(roleForAdCom1);
 
@@ -67,7 +67,7 @@ public class SpringSecurityDynamicAuthorizationApplication {
             var roleForAdCom2 = new RoleEntity();
             roleForAdCom2.setResourceId(com2.getId());
             roleForAdCom2.setUserEntity(adCom2);
-            roleForAdCom2.setRoleType(RoleType.COMPANY_DELETE);
+            roleForAdCom2.setRoleType(RoleType.COMPANY_FULL_ACCESS);
             roleForAdCom2.setResourceType(ResourceType.COMPANY);
             roleRepository.save(roleForAdCom2);
         };

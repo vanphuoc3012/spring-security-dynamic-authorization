@@ -42,17 +42,21 @@ public class RoleTest {
         return Stream.of(
                 Arguments.arguments(
                         RoleType.MASTER_ADMIN,
-                        Set.of(RoleType.MASTER_ADMIN, RoleType.DELETE, RoleType.CREATE_UPDATE, RoleType.READ, RoleType.USER, RoleType.GUEST),
+                        Set.of(RoleType.MASTER_ADMIN,
+                                RoleType.COMPANY_FULL_ACCESS, RoleType.COMPANY_EDITOR,
+                                RoleType.COMPANY_VIEWER, RoleType.STORE_FULL_ACCESS,
+                                RoleType.STORE_EDITOR, RoleType.STORE_VIEWER,
+                                RoleType.GUEST),
                         true
                 ),
                 Arguments.arguments(
-                        RoleType.CREATE_UPDATE,
-                        Set.of(RoleType.DELETE, RoleType.MASTER_ADMIN),
+                        RoleType.STORE_FULL_ACCESS,
+                        Set.of(RoleType.COMPANY_VIEWER, RoleType.COMPANY_EDITOR, RoleType.COMPANY_FULL_ACCESS, RoleType.MASTER_ADMIN),
                         false
                 ),
                 Arguments.arguments(
-                        RoleType.READ,
-                        Set.of(RoleType.CREATE_UPDATE, RoleType.DELETE, RoleType.MASTER_ADMIN),
+                        RoleType.COMPANY_VIEWER,
+                        Set.of(RoleType.STORE_FULL_ACCESS, RoleType.STORE_EDITOR, RoleType.COMPANY_EDITOR),
                         false
 
                 )

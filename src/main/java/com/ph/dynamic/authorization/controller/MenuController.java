@@ -33,4 +33,9 @@ public class MenuController {
     public String delMenus() {
         return "DEL:: menus";
     }
+
+    @GetMapping("/stores/{storeId}/menus")
+    public String getStoreMenus(@PathVariable Long storeId){
+        return "GET:: stores menus";
+    }
 }
