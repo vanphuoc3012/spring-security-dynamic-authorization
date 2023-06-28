@@ -14,6 +14,9 @@ public interface RoleRepository extends JpaRepository<RoleEntity, Long> {
     Set<RoleType> findAllByUserEntity_EmailAndResourceId(
             @Param("email") String email, @Param("resourceId") Long resourceId);
 
+    @Query("SELECT re.roleType FROM RoleEntity re WHERE re.userEntity.email = :email")
+    Set<RoleType> findAllByUserEmail(@Param("email") String email);
+
 //    @Query("SELECT re.roleType FROM RoleEntity re WHERE ")
 //    Set<RoleType> findAllByUserEmailAndResourceIdAndResourceType(
 //            @Param("email") String email, @Param("resourceId") Long resourceId, @Param("resourceType") String resourceType

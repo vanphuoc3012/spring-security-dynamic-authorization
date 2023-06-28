@@ -27,9 +27,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
-                .failureHandler((req, res, e) -> {
-                    res.sendError(401, "Login failed");
-                })
+                .loginProcessingUrl("/login")
+                .successHandler((req, res, a) -> res.setStatus(200))
+                .failureHandler((req, res, e) -> res.setStatus(401))
                 .and()
                 .logout();
     }

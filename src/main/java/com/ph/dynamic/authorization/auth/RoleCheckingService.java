@@ -40,6 +40,11 @@ public class RoleCheckingService {
         return true;
     }
 
+    public boolean isMasterAdmin() {
+        Set<RoleType> roleTypes = roleRepository.findAllByUserEmail(getUserName());
+        return hasAnyRole(RoleType.MASTER_ADMIN);
+    }
+
     private String getUserName() {
         return (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     }

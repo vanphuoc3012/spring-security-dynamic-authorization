@@ -22,9 +22,4 @@ public class UserController {
     public ResponseEntity<List<UserEntity>> getUsers() {
         return ResponseEntity.ok(userRepository.findAll());
     }
-
-    @PostMapping
-    public String logout() {
-        return "Logout";
-    }
 }

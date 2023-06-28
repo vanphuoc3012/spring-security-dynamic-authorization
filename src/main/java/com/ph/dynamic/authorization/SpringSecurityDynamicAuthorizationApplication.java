@@ -30,8 +30,13 @@ public class SpringSecurityDynamicAuthorizationApplication {
             var sysAdmin = new UserEntity();
             sysAdmin.setEmail("admin");
             sysAdmin.setPassword("password");
-
             userRepository.save(sysAdmin);
+
+            var roleForSysAdmin = new RoleEntity();
+            roleForSysAdmin.setResourceId(null);
+            roleForSysAdmin.setUserEntity(sysAdmin);
+            roleForSysAdmin.setRoleType(RoleType.MASTER_ADMIN);
+            roleForSysAdmin.setResourceType(ResourceType.ALL);
 
             var com1 = new CompanyEntity();
             com1.setName("Company 1");
