@@ -1,5 +1,6 @@
 package com.ph.dynamic.authorization.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -26,12 +27,15 @@ public class StoreEntity {
 
     @ManyToOne
     @JoinColumn(name = "company_id")
+    @JsonIgnore
     private CompanyEntity companyEntity;
 
     @ManyToMany
+    @JsonIgnore
     private List<MenuEntity> menuEntityList;
     private String status;
 
     @OneToMany(mappedBy = "storeEntity")
+    @JsonIgnore
     private List<GroupEntity> groupEntityList;
 }

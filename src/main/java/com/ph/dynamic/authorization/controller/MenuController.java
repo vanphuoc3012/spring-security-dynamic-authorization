@@ -16,26 +16,21 @@ public class MenuController {
     }
 
     @PostMapping
-    @PreAuthorize("@RoleCheckingService.isMasterAdmin()")
+    @PreAuthorize("@RoleCheckingService.hasMasterAdmin()")
     public String postMenus() {
         return "POST:: menus";
     }
 
     @PutMapping
-    @PreAuthorize("@RoleCheckingService.isMasterAdmin()")
+    @PreAuthorize("@RoleCheckingService.hasMasterAdmin()")
     public String putMenus(Principal principal){
 
         return "PUT:: menus" + " " + principal;
     }
 
     @DeleteMapping
-    @PreAuthorize("@RoleCheckingService.isMasterAdmin()")
+    @PreAuthorize("@RoleCheckingService.hasMasterAdmin()")
     public String delMenus() {
         return "DEL:: menus";
-    }
-
-    @GetMapping("/stores/{storeId}/menus")
-    public String getStoreMenus(@PathVariable Long storeId){
-        return "GET:: stores menus";
     }
 }

@@ -31,7 +31,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .successHandler((req, res, a) -> res.setStatus(200))
                 .failureHandler((req, res, e) -> res.setStatus(401))
                 .and()
-                .logout();
+                .logout()
+                .deleteCookies("JSESSIONID")
+                .logoutSuccessHandler((req, res, a) -> res.setStatus(200))
+                .and()
+                .exceptionHandling()
+                .accessDeniedHandler((req, res, e) -> res.setStatus(403))
+//                .authenticationEntryPoint((req, res, e) -> res.setStatus(401))
+        ;
     }
 
 }

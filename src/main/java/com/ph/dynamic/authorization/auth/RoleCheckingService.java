@@ -1,7 +1,5 @@
 package com.ph.dynamic.authorization.auth;
 
-import com.ph.dynamic.authorization.auth.role.ResourceType;
-import com.ph.dynamic.authorization.auth.role.RoleEntity;
 import com.ph.dynamic.authorization.auth.role.RoleType;
 import com.ph.dynamic.authorization.repository.RoleRepository;
 import lombok.RequiredArgsConstructor;
@@ -17,10 +15,41 @@ import java.util.Set;
 public class RoleCheckingService {
     private final RoleRepository roleRepository;
 
-    public boolean hasAnyRoleByResourcesId(Long resouresId, RoleType... roleList) {
-        log.debug("## hasAnyRoleByResourcesId:, resouresId: {}, roleList: {}", resouresId, roleList);
+    public boolean hasAnyRoleByCompanyId(Long companyId, RoleType... roleTypeList) {
+        log.debug(getUserName());
+        if (hasMasterAdmin()) {
+            return true;
+        }
+        log.debug("## hasAnyRoleByCompanyId:, companyId: {}, roleTypeList: {}", companyId, roleTypeList);
+        var roleTypes = roleRepository.findAllRoleTypeByUserEmailAndCompanyId(getUserName(), companyId);
+        log.debug("Query result: {}", roleTypes);
+        for (RoleType expectedRole : roleTypeList) {
+            if (roleTypes.stream().anyMatch(role -> role.includes(expectedRole))) {
+                return true;
+            }
+        }
+        return false;
+    }
 
-        Set<RoleType> roleTypes = roleRepository.findAllByUserEntity_EmailAndResourceId(getUserName(), resouresId);
+    public boolean hasAnyRoleByStoreId(Long storeId, RoleType... roleTypeList) {
+        if (hasMasterAdmin()) {
+            return true;
+        }
+        log.debug("## hasAnyRoleByStoreId:, storeId: {}, roleTypeList: {}", storeId, roleTypeList);
+        var roleTypes = roleRepository.findAllRoleTypeByUserEmailAndStoreId(getUserName(), storeId);
+        log.debug("Query result: {}", roleTypes);
+        for (RoleType expectedRole : roleTypeList) {
+            if (roleTypes.stream().anyMatch(role -> role.includes(expectedRole))) {
+                return true;
+            }
+        }
+        return false;
+    }
+    @Deprecated
+    public boolean hasAnyRoleByResourcesId(Long resourceId, RoleType... roleList) {
+        log.debug("## hasAnyRoleByResourcesId:, resourceId: {}, roleList: {}", resourceId, roleList);
+
+        Set<RoleType> roleTypes = roleRepository.findAllByUserEntity_EmailAndResourceId(getUserName(), resourceId);
         log.debug("Query result: {}", roleTypes);
 
         for (RoleType expectedRole : roleList) {
@@ -31,18 +60,10 @@ public class RoleCheckingService {
         return false;
     }
 
-    public boolean hasAnyRoleByCompanyId(Long companyId, Role... roleList) {
-        return false;
-    }
-
-    public boolean hasAnyRole(Role... roleList) {
-
-        return true;
-    }
-
-    public boolean isMasterAdmin() {
+    public boolean hasMasterAdmin() {
+        log.debug(getUserName());
         Set<RoleType> roleTypes = roleRepository.findAllByUserEmail(getUserName());
-        return hasAnyRole(RoleType.MASTER_ADMIN);
+        return roleTypes.stream().anyMatch(role -> role.includes(RoleType.MASTER_ADMIN));
     }
 
     private String getUserName() {
